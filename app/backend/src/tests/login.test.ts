@@ -26,7 +26,7 @@ describe('teste rota "/login"', () => {
         username: 'Admin',
         role: 'admin',
         email: 'admin@admin.com',
-        password: '12345678'
+        password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO'
       } as User);
   });
 
@@ -38,7 +38,7 @@ describe('teste rota "/login"', () => {
     chaiHttpResponse = await chai
       .request(app)
       .post('/login')
-      .send({ email: 'admin@admin.com', password: '12345678' })
+      .send({ email: 'admin@admin.com', password: 'secret_user' })
 
     expect(chaiHttpResponse.status).to.be.equals(200)
   });
@@ -47,8 +47,27 @@ describe('teste rota "/login"', () => {
     chaiHttpResponse = await chai
       .request(app)
       .post('/login')
-      .send({ email: 'admin@admin.com', password: '12345678' })
+      .send({ email: 'admin@admin.com', password: 'secret_user' })
 
     expect(chaiHttpResponse.body.token).to.be.string
   });
+
+  it('testa se retorna erro se nao tiver o e-mail', async () => {
+    chaiHttpResponse = await chai
+      .request(app)
+      .post('/login')
+      .send({ password: 'secret_user' });
+
+    expect(chaiHttpResponse.body.message).to.be.equals('All fields must be filled');
+  });
+
+  it('testa se retorna erro sem o password', async () => {
+    chaiHttpResponse = await chai
+      .request(app)
+      .post('/login')
+      .send({ email: 'admin@admin.com' });
+
+    expect(chaiHttpResponse.body.message).to.be.equals('All fields must be filled');
+  });
+
 });
