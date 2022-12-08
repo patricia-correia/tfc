@@ -19,18 +19,18 @@ describe('teste rota "/login"', () => {
   let chaiHttpResponse: Response;
 
   before(async () => {
-  sinon
-    .stub(User, "findOne")
+    sinon
+      .stub(User, "findOne")
       .resolves({
-        id: 1,
+        id: 2,
         username: 'Admin',
         role: 'admin',
         email: 'admin@admin.com',
-        password: '12345678' 
+        password: '12345678'
       } as User);
   });
 
-  after(()=>{
+  after(() => {
     (User.findOne as sinon.SinonStub).restore();
   })
 
@@ -38,7 +38,7 @@ describe('teste rota "/login"', () => {
     chaiHttpResponse = await chai
       .request(app)
       .post('/login')
-      .send({ email: 'admin@admin.com', password: '12345678'})
+      .send({ email: 'admin@admin.com', password: '12345678' })
 
     expect(chaiHttpResponse.status).to.be.equals(200)
   });
