@@ -1,6 +1,6 @@
 import * as bycrypt from 'bcryptjs';
 import User from '../models/UserModel';
-import Token from '../middlewares/token';
+import Token from '../middlewares/tokenValide';
 
 class loginService {
   private _email: string;

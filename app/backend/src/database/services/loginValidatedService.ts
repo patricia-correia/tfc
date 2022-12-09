@@ -1,16 +1,10 @@
-import Token from '../middlewares/token';
+import IToken from '../interfaces/tokenInterface';
+import User from '../models/UserModel';
 
 class loginValidatedService {
-  static execute(token: string | undefined) {
-    if (!token) {
-      return { type: 404, message: 'token not found' };
-    }
-    const validate = Token.validateToken(token);
-
-    if (!validate) {
-      return { type: 404, message: 'invalid token' };
-    }
-    return { type: null, message: validate.role };
+  static async execute(id: number) {
+    const login = await User.findOne({ where: { id } }) as IToken;
+    return { role: login.role };
   }
 }
 

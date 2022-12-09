@@ -1,10 +1,11 @@
-import * as express from 'express';
+import { Router } from 'express';
+import Token from '../middlewares/token';
 import loginController from '../controllers/loginController';
 import loginValidatedController from '../controllers/loginValidatedController';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/login', loginController.login);
-router.get('/login/validate', loginValidatedController.execute);
+router.get('/login/validate', Token, (req, res) => loginValidatedController.execute(req, res));
 
 export default router;
