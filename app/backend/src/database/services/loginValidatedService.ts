@@ -1,4 +1,4 @@
-import IToken from '../interfaces/tokenInterface';
+/* import IToken from '../interfaces/tokenInterface';
 import User from '../models/UserModel';
 
 class loginValidatedService {
@@ -9,3 +9,4 @@ class loginValidatedService {
 }
 
 export default loginValidatedService;
+ */

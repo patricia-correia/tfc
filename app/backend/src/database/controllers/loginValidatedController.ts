@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+/* import { Request, Response } from 'express';
 import LoginValidatedService from '../services/loginValidatedService';
 
 class loginValidatedController {
@@ -10,3 +10,4 @@ class loginValidatedController {
 }
 
 export default loginValidatedController;
+ */
