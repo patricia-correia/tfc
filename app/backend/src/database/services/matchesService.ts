@@ -1,10 +1,10 @@
 import Matches from '../models/MatchesModel';
 import Teams from '../models/TeamsModel';
 
-class MatchesService {
+export default class MatchesService {
   /* private _association = [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
-    { model: Teams, as: 'teamAway', attributes: ['teamName'] }];
- */
+    { model: Teams, as: 'teamAway', attributes: ['teamName'] }]; */
+
   static async allMatches() {
     const matches = await Matches.findAll({
       include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
@@ -19,6 +19,7 @@ class MatchesService {
       include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
         { model: Teams, as: 'teamAway', attributes: ['teamName'] }],
     });
+
     return result;
   }
 
@@ -37,8 +38,6 @@ class MatchesService {
   static async updateMatch(id: number, info: object) {
     await Matches.update(info, { where: { id } });
 
-    return { message: 'Updated' };
+    return { message: `Updated: ${info}` };
   }
 }
-
-export default MatchesService;

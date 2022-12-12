@@ -6,7 +6,7 @@ import chaiHttp = require('chai-http');
 import App from '../app';
 
 import { Response } from 'superagent';
-import MatchesModel from '../database/models/MatchesModel';
+import Matches from '../database/models/MatchesModel';
 import { inProgressFalse, inProgressTrue, matchesMock } from './Mocks/matchesMock';
 
 chai.use(chaiHttp);
@@ -19,11 +19,11 @@ describe('Teste de funcionalidade de matches', () => {
   let chaiHttpResponse: Response;
 
   beforeEach(async () => {
-    sinon.stub(MatchesModel, 'findAll').resolves(matchesMock as unknown as MatchesModel[])
+    sinon.stub(Matches, 'findAll').resolves(matchesMock as unknown as Matches[])
   });
 
   afterEach(() => {
-    (MatchesModel.findAll as sinon.SinonStub).restore();
+    (Matches.findAll as sinon.SinonStub).restore();
   })
 
   it('Testa se o retorno do status http é 200 e retorna corretamente todos as partidas', async () => {

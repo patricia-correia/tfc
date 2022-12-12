@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Teams from '../models/TeamsModel';
 
-async function matchMiddleware(req: Request, res: Response, next: NextFunction) {
+export default async function matchMiddleware(req: Request, res: Response, next: NextFunction) {
   const { homeTeam, awayTeam } = req.body;
 
   if (homeTeam === awayTeam) {
@@ -19,5 +19,3 @@ async function matchMiddleware(req: Request, res: Response, next: NextFunction) 
 
   next();
 }
-
-export default matchMiddleware;

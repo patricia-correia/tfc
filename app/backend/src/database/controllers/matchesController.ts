@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import MatchesService from '../services/matchesService';
 
-class MatchesController {
+export default class MatchesController {
   static async allMatches(req: Request, res: Response) {
     const { inProgress } = req.query;
 
@@ -42,5 +42,3 @@ class MatchesController {
     return res.status(200).json({ message });
   }
 }
-
-export default MatchesController;
