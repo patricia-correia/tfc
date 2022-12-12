@@ -2,9 +2,6 @@ import Matches from '../models/MatchesModel';
 import Teams from '../models/TeamsModel';
 
 export default class MatchesService {
-  /* private _association = [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
-    { model: Teams, as: 'teamAway', attributes: ['teamName'] }]; */
-
   static async allMatches() {
     const matches = await Matches.findAll({
       include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
