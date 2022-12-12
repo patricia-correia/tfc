@@ -2,18 +2,16 @@ import { Request, Response } from 'express';
 import MatchesService from '../services/matchesService';
 
 class MatchesController {
-  constructor(private _matchesService: MatchesService) {}
-
-  async allMatches(req: Request, res: Response) {
+  static async allMatches(req: Request, res: Response) {
     const { inProgress } = req.query;
 
     if (inProgress) {
-      const message = await this._matchesService.inProgress(inProgress === 'true');
+      const message = await MatchesService.inProgress(inProgress === 'true');
 
       return res.status(200).json(message);
     }
 
-    const message = await this._matchesService.allMatches();
+    const message = await MatchesService.allMatches();
 
     return res.status(200).json(message);
   }
@@ -32,7 +30,7 @@ class MatchesController {
 
     const { message } = await MatchesService.finishMatch(id);
 
-    return res.status(201).json({ message });
+    return res.status(200).json({ message });
   }
 
   static async updateMatch(req: Request, res: Response) {

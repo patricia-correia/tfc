@@ -2,19 +2,22 @@ import Matches from '../models/MatchesModel';
 import Teams from '../models/TeamsModel';
 
 class MatchesService {
-  private _association = [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
+  /* private _association = [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
     { model: Teams, as: 'teamAway', attributes: ['teamName'] }];
-
-  async allMatches() {
-    const matches = await Matches.findAll({ include: this._association });
+ */
+  static async allMatches() {
+    const matches = await Matches.findAll({
+      include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
+        { model: Teams, as: 'teamAway', attributes: ['teamName'] }] });
 
     return matches;
   }
 
-  async inProgress(inProgress: boolean) {
+  static async inProgress(inProgress: boolean) {
     const result = await Matches.findAll({
       where: { inProgress },
-      include: this._association,
+      include: [{ model: Teams, as: 'teamHome', attributes: ['teamName'] },
+        { model: Teams, as: 'teamAway', attributes: ['teamName'] }],
     });
     return result;
   }
@@ -34,7 +37,7 @@ class MatchesService {
   static async updateMatch(id: number, info: object) {
     await Matches.update(info, { where: { id } });
 
-    return { message: `Updated: ${info}` };
+    return { message: 'Updated' };
   }
 }
 
