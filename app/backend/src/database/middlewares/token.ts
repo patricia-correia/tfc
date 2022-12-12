@@ -4,9 +4,8 @@ import { NextFunction, Request, Response } from 'express';
 
 const secret: string = process.env.JWT_SECRET || 'jwt_secret';
 
-function verifyToken(req: Request, res: Response, next: NextFunction) {
+export default function verifyTokenMiddleware(req: Request, res: Response, next: NextFunction) {
   const token = req.header('authorization');
-  // const { data } = jwt.verify(token as string, secret) as jwt.JwtPayload;
 
   try {
     const { data } = jwt.verify(token as string, secret) as jwt.JwtPayload;
@@ -17,5 +16,3 @@ function verifyToken(req: Request, res: Response, next: NextFunction) {
     return res.status(401).json({ message: 'Token must be a valid token' });
   }
 }
-
-export default verifyToken;
